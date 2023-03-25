@@ -5,13 +5,16 @@ on: [push]
 jobs:
   Ubuntu:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 'lts/*'
+          node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - name: Install
         run: npm ci --no-audit
@@ -21,13 +24,16 @@ jobs:
         shell: bash
   Windows:
     runs-on: windows-latest
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 'lts/*'
+          node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - name: Install
         run: npm ci --no-audit
