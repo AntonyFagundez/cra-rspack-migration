@@ -7,37 +7,45 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x, 18.x]
+        node-version: [18.x]
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
+      - name: Use pnpm Setup
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: 'pnpm'
       - name: Install
-        run: npm ci --no-audit
+        run: pnpm i --frozen-lockfile
         shell: bash
       - name: Build
-        run: npm run build
+        run: pnpm build
         shell: bash
   Windows:
     runs-on: windows-latest
     strategy:
       matrix:
-        node-version: [16.x, 18.x]
+        node-version: [18.x]
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
+      - name: Use pnpm Setup
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: 'pnpm'
       - name: Install
-        run: npm ci --no-audit
+        run: pnpm i --frozen-lockfile
         shell: bash
       - name: Build
-        run: npm run build
+        run: pnpm build
         shell: bash
