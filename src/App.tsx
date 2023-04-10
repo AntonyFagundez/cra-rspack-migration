@@ -1,15 +1,23 @@
-import React from 'react';
 import './App.css';
-import {coso} from "./App.module.css"
+import styles from "./App.module.scss";
+import stylesRaw from "./App.module.scss?raw";
 
 function App() {
+
   return (
     <div className="App">
+      <style
+        data-injected
+        dangerouslySetInnerHTML={{
+          // example to load css raw (maybe util for RSC)
+          __html: stylesRaw
+        }} />
+      
       <header className="App-header">
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <p className={coso}>
+        <p className={styles.coso}>
           Example of sass
         </p>
         <a
